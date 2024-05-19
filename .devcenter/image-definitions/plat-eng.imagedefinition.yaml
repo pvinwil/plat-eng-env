@@ -1,0 +1,21 @@
+$schema: "1.0"
+name: "platform-engineering-definition"
+description: "This definition is for the Contoso platform engineering environment"
+
+image: "microsoftvisualstudio_visualstudioplustools_vs-2022-ent-general-win11-m365-gen2"
+enableScheduledRefresh: true
+scheduledTimePeriod: hour
+scheduledRecurrence: 24
+#
+tasks:
+  - name: winget
+    parameters:
+      downloadUrl: 'https://raw.githubusercontent.com/contoso-co/common-eng-sys/main/dsc-configurations/common-config.dsc.yaml'
+  - name: git-clone
+    description: Clone this repository into z:\Workspaces
+    parameters:
+      repositoryUrl: https://github.com/contoso-co/eshop.git
+      directory: z:\workspaces
+  - name: winget
+    parameters:
+      configurationFile: 'z:\workspaces\plat-eng-env\.configurations\plat-eng.dsc.yaml'

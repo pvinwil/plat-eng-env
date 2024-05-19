@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+properties:
+  configurationVersion: 0.2.0
+  ########################################
+  ### RESOURCES: System Configuration
+  ########################################
+  resources:
+   # Creates a new Dev Drive
+   - resource: Disk
+     id: DevDrive1
+     directives:
+       module: StorageDsc
+       allowPrerelease: true
+     settings:
+       DiskId: '0'
+       DiskIdType: 'Number'
+       DriveLetter: 'Z'
+       FSLabel: 'Dev Drive 1'
+       DevDrive: true
+       AllowDestructive: true
+       FSFormat: 'ReFS'
+       Size: '50Gb'
+   ### Install Git
+   ### -------------------------------------
+   - resource: Microsoft.WinGet.DSC/WinGetPackage
+     directives:
+       allowPrerelease: true
+     settings:
+       id: Git.Git
